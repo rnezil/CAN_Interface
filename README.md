@@ -1,14 +1,16 @@
-This program supports a cheap interface for sending/receiving messages to/from a CAN bus with Python-CAN.
+This program supports a cheap (<$15 Canadian) interface for sending/receiving messages to/from a 1Mbps CAN2.0B bus with 64-bit Python.
 
 Parts:
 1. Arduino Nano (ATmega328)
 2. MCP2515 CAN Bus Module
 3. Mini-USB Cable
 
+
 Software:
 1. CAN over Serial by Python-CAN https://python-can.readthedocs.io/en/stable/interfaces/serial.html
 2. CAN over Serial for Arduino by Henrik Soderlund https://github.com/henriksod/Arduino_CANOverSerial
 3. Arduino MCP2515 CAN interface library by autotwp https://github.com/autowp/arduino-mcp2515 
+
 
 Instructions (Windows):
 1. Connect a pin jumper at J1 on MCP2515, and connect MCP2515 to CAN bus.

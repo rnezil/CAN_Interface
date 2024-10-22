@@ -15,7 +15,7 @@ Software:
 Instructions (Windows):
 1. Connect a pin jumper at J1 on the MCP2515, and connect the MCP2515 to a CAN bus.
 2. Look at the bottom of the Arduino Nano board, there is a Schottky diode underneath the mini-USB port: carefully solder a wire to the anode of this diode, this wire will serve as the 5V supply for the MCP2515.
-3. Wire MCP2515 to Arduino Nano, ensuring that the 5V pin on the MCP2515 is connected to the wire from Step 3, not the 5V pin on the Arduino Nano.
+3. Wire the MCP2515 to the Arduino Nano, ensuring that the 5V pin on the MCP2515 is connected to the wire from Step 3, not the 5V pin on the Arduino Nano.
 4. Plug the Arduino Nano into your computer, and take note of which COM port it is using.
 5. Download software items 2 and 3 as zip files and load them into a sketch in the Arduino IDE so that Arduino IDE knows where to find them.
 6. Download can_interface.ino, load this sketch into Arduino IDE and then load it onto the Arduino Nano via the COM port from Step 4.

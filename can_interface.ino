@@ -106,7 +106,7 @@ void loop() {
   }
   else{
     // If waiting on instruction from master...
-    if (can_serial.receive(&can_serial_frame, timeout) {
+    if (can_serial.receive(&can_serial_frame, timeout)) {
       // Copy message contents.
       can_bus_frame.can_id = can_serial_frame.arbitration_id;
       can_bus_frame.can_dlc = can_serial_frame.dlc;

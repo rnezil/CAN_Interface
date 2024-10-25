@@ -118,7 +118,7 @@ void loop() {
       can_bus.sendMessage(MCP2515::TXB1, &can_bus_frame);
 
       // Indicate that a reply is needed.
-      if (can_serial_frame.can_dlc == 0) {
+      if (can_serial_frame.dlc == 0) {
         reply = true;
       }
     }

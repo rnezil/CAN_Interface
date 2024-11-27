@@ -45,7 +45,7 @@ void setup() {
 
   // Initialize MCP2515 for 1Mbps baud @ 16MHz.
   can_bus.reset();
-  can_bus.setBitrate(CAN_1000KBPS, MCP_16MHZ);
+  can_bus.setBitrate(CAN_1000KBPS, MCP_20MHZ);
   can_bus.setNormalMode();
   
   // Give it a second.
@@ -66,7 +66,7 @@ void loop() {
         if (can_bus.readMessage(MCP2515::RXB0, &can_bus_frame) == MCP2515::ERROR_OK) {
           // Frame received from RXB0 message.
           // Copy message contents.
-          can_serial_frame.arbitration_id = can_bus_frame.can_id ;
+          can_serial_frame.arbitration_id = can_bus_frame.can_id & 0x1FFFFFFF;
           can_serial_frame.dlc = can_bus_frame.can_dlc;
           for (int i = 0; i < can_bus_frame.can_dlc; i++) {
             can_serial_frame.payload[i] = can_bus_frame.data[i];
@@ -84,8 +84,8 @@ void loop() {
         if (can_bus.readMessage(MCP2515::RXB1, &can_bus_frame) == MCP2515::ERROR_OK) {
           // Frame received from RXB1 message.
           // Copy message contents.
-          can_serial_frame.arbitration_id = can_bus_frame.can_id ;
-          can_serial_frame.dlc = can_bus_frame.can_dlc;
+          can_serial_frame.arbitration_id = can_bus_frame.can_id & 0x1FFFFFFF;
+          can_serial_frame.dlc = *(uint8_t*)&can_bus_frame.can_dlc;
           for (int i = 0; i < can_bus_frame.can_dlc; i++) {
             can_serial_frame.payload[i] = can_bus_frame.data[i];
           }
@@ -108,7 +108,7 @@ void loop() {
     // If waiting on instruction from master...
     if (can_serial.receive(&can_serial_frame, timeout)) {
       // Copy message contents.
-      can_bus_frame.can_id = can_serial_frame.arbitration_id;
+      can_bus_frame.can_id = can_serial_frame.arbitration_id | CAN_EFF_FLAG;
       can_bus_frame.can_dlc = can_serial_frame.dlc;
       for (int i = 0; i < can_bus_frame.can_dlc; i++) {
         can_bus_frame.data[i] = can_serial_frame.payload[i];
